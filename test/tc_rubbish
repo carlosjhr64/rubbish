@@ -1,0 +1,70 @@
+#! ruby
+require 'test/unit'
+require 'rubbish'
+
+class TestRubbish < Test::Unit::TestCase
+
+  def test_getter
+    assert_nothing_raised() do
+      assert_equal 'fish', Rubbish::Fish.sh
+      assert_equal 'bash', Rubbish::Bash.sh
+    end
+  end
+
+  def test_setter
+    assert_nothing_raised() do
+      # fish
+      sh = Rubbish::Fish.sh
+      Rubbish::Fish.sh = 'fishshell'
+      assert_equal 'fishshell', Rubbish::Fish.sh
+      Rubbish::Fish.sh = sh
+      assert_equal 'fish', Rubbish::Fish.sh
+      # bash
+      sh = Rubbish::Bash.sh
+      Rubbish::Bash.sh = 'bashshell'
+      assert_equal 'bashshell', Rubbish::Bash.sh
+      Rubbish::Bash.sh = sh
+      assert_equal 'bash', Rubbish::Bash.sh
+    end
+  end
+
+  def test_shell
+    assert_nothing_raised() do
+      # Rubbish.shell(shell, command, read?, &block)
+      a = Rubbish.shell('bash', 'echo "Hello"')
+      assert_equal "Hello\n", a
+      a = Rubbish.shell('fish', 'true', false) # fish's "true" command
+      assert_equal true, a
+      a = Rubbish.shell('fish', 'false', false) # fish's "false" command
+      assert_equal false, a
+      a = Rubbish.shell('bash'){|psh| psh.puts 'echo "World!"'}
+      assert_equal "World!\n", a
+      a = Rubbish.shell('fish', false){|psh| psh.puts 'true'}
+      assert_equal true, a
+      a = Rubbish.shell('fish', false){|psh| psh.puts 'false'}
+      assert_equal false, a
+      b = nil
+      a = Rubbish.shell('bash') do |psh|
+        psh.puts 'echo "Good"'
+        psh.puts 'echo "Day!"'
+        b = psh.gets
+      end
+      assert_equal "Good\n", b
+      assert_equal "Day!\n", a
+      b = nil
+      a = Rubbish.shell('bash', 'echo "OK"') do |psh|
+        b = psh.gets
+      end
+      assert_equal '', a
+      assert_equal "OK\n", b
+    end
+  end
+
+  def test_shells
+    assert_nothing_raised() do
+      assert_equal 'OK', Rubbish.fish('echo "OK"').strip
+      assert_equal 'OK', Rubbish.bash('echo "OK"').strip
+    end
+  end
+
+end
