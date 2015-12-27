@@ -4,6 +4,6 @@ require 'rubbish/bash'
 require 'rubbish/fish'
 
 # Requires:
-# `ruby`
-# `bash`
-# `fish`
+#`ruby`
+#`bash`
+#`fish`
