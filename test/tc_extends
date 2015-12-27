@@ -1,0 +1,16 @@
+#! ruby
+require 'test/unit'
+require 'rubbish'
+
+class TestRubbish < Test::Unit::TestCase
+
+  def test_shells
+    extend Rubbish::Fish
+    extend Rubbish::Bash
+    assert_nothing_raised() do
+      assert_equal 'OK', bash('echo "OK"').strip
+      assert_equal 'OK', fish('echo "OK"').strip
+    end
+  end
+
+end
