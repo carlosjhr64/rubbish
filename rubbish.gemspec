@@ -12,11 +12,13 @@ Gem::Specification.new do |s|
   s.licenses = ['MIT']
 
   s.description = <<DESCRIPTION
-TODO
+A ruby-ish way to go to the shell.
+
+Bash and Fish aware.
 DESCRIPTION
 
   s.summary = <<SUMMARY
-TODO
+A ruby-ish way to go to the shell.
 SUMMARY
 
   s.extra_rdoc_files = ['README.rdoc']
