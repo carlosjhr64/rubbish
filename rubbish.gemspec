@@ -34,5 +34,8 @@ lib/rubbish/rubbish.rb
 lib/rubbish/version.rb
   )
 
+  s.requirements << 'ruby: ruby 2.2.3p173 (2015-08-18 revision 51636) [x86_64-linux]'
+  s.requirements << 'bash: GNU bash, version 4.2.53(1)-release (x86_64-redhat-linux-gnu)'
+  s.requirements << 'fish: 2.1.1'
 
 end
