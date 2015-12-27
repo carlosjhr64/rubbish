@@ -2,15 +2,45 @@
 
 == DESCRIPTION:
 
-TODO
+A ruby-ish way to go to the shell.
+
+Bash and Fish aware.
 
 == SYNOPSIS:
 
-TODO
+    require 'rubbish'
+    extend Rubbish::Fish
+    a = fish <<FISH
+      echo "But why???"
+    FISH
+    puts a+'Because!!!!'
 
-== FEATURES/PROBLEMS:
+== FEATURES:
 
-TODO
+Read by default:
+
+* Rubbish.shell('bash','echo "OK"') #=> OK
+* Rubbish.shell('bash'){|p| p.puts 'echo "OK"'}  #=> OK
+* Rubbish.bash('echo "OK"') #=> OK
+* Rubbish.fish('true') #=> ''
+* Rubbish.fish('false') #=> ''
+
+Passing false will not read, but get the exit status instead:
+
+* Rubbish.fish('true', false) #=> true
+* Rubbish.fish('false', false) #=> false
+
+An edge case:
+
+    require 'rubbish'
+    b = nil
+    a = Rubbish.bash do |p|
+      p.puts "echo Good"
+      p.puts "echo Day!"
+      b = p.gets
+    end
+    puts b # Good
+    puts a # Day!
 
 == INSTALL:
 
