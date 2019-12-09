@@ -1,9 +1,9 @@
 #! ruby
 require 'test/unit'
-require 'rubbish/version'
+require 'rubbish'
 
 class TestVersion < Test::Unit::TestCase
-  VERSION = '0.0.0'
+  VERSION = '0.1.191209'
   def test_version
     assert_nothing_raised() do
       assert_equal VERSION, Rubbish::VERSION
