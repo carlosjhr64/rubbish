@@ -1,12 +1,12 @@
-= rubbish
+# rubbish
 
-== DESCRIPTION:
+## DESCRIPTION:
 
 A ruby-ish way to go to the shell.
 
 Bash and Fish aware.
 
-== SYNOPSIS:
+## SYNOPSIS:
 
     require 'rubbish'
     extend Rubbish::Fish
@@ -15,7 +15,7 @@ Bash and Fish aware.
     FISH
     puts a+'Because!!!!'
 
-== FEATURES:
+## FEATURES:
 
 Read by default:
 
@@ -42,15 +42,15 @@ An edge case:
     puts b # Good
     puts a # Day!
 
-== INSTALL:
+## INSTALL:
 
-  $ sudo gem install rubbish
+    $ gem install rubbish
 
 == LICENSE:
 
 (The MIT License)
 
-Copyright (c) 2015 carlosjhr64
+Copyright (c) 2019 carlosjhr64
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
