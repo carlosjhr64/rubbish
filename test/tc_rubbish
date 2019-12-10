@@ -3,17 +3,15 @@ require 'test/unit'
 require 'rubbish'
 
 class TestRubbish < Test::Unit::TestCase
-
   def test_shell_does_not_break
     assert_nothing_raised() do
-      ['bash','fish'].each do |sh|
-        [nil,true,false].each do |read|
-          a = Rubbish.shell(sh, 'echo "OK"', read)
-          b = Rubbish.shell(sh, read, 'echo "OK"')
-          c = Rubbish.shell(sh, read){|psh| psh.puts 'echo "OK"'}
-          [a,b,c].each do |x|
+      ['bash', 'fish'].each do |shell|
+        [true, false].each do |read|
+          a = Rubbish.shell(shell, 'echo "OK"', read: read)
+          b = Rubbish.shell(shell, read: read){|psh| psh.puts 'echo "OK"'}
+          [a,b].each do |x|
             case read
-            when true, nil
+            when true
               assert_equal("OK\n", x)
             when false
               assert_equal(true, x)
@@ -24,7 +22,7 @@ class TestRubbish < Test::Unit::TestCase
     end
   end
 
-  def test_shell_edge_cases
+  def test_shell_edge_case
     b = nil
     a = Rubbish.shell('bash') do |psh|
       psh.puts 'echo "Good"'
@@ -36,10 +34,22 @@ class TestRubbish < Test::Unit::TestCase
   end
 
   def test_fish_true_false
-    a = Rubbish.shell('fish','true',false)
+    a = Rubbish.shell('fish', 'true', read: false)
     assert_equal(true, a)
-    b = Rubbish.shell('fish','false',false)
+    b = Rubbish.shell('fish', 'false', read: false)
     assert_equal(false, b)
   end
 
+  def test_add_shell_version
+    Rubbish::SHELL_VERSION[:ruby] = '0.0'
+    assert_raise(RuntimeError) do
+      Rubbish.ruby('puts "OK"')
+    end
+    Rubbish::SHELL_VERSION[:ruby] = '2.0'
+    assert_equal "OK\n", Rubbish.ruby('puts "OK"')
+    # Ensuring it only checks version once...
+    assert_true Rubbish::SHELL_VERSION.has_key? :ruby
+    assert_nil Rubbish::SHELL_VERSION[:ruby]
+    assert_equal "Still OK\n", Rubbish.ruby('puts "Still OK"')
+  end
 end
