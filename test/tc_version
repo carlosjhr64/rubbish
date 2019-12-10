@@ -1,13 +1,10 @@
 #! ruby
 require 'test/unit'
-require 'rubbish'
 
 class TestVersion < Test::Unit::TestCase
-  VERSION = '0.1.191209'
   def test_version
-    assert_nothing_raised() do
-      assert_equal VERSION, Rubbish::VERSION
-      assert( system "grep version rubbish.gemspec | grep = | grep #{VERSION}" )
-    end
+    lib_version = `egrep -o '[0-9]+.[0-9]+.[0-9]+' lib/*.rb`.split.first
+    gemspec_version = `egrep -o '[0-9]+.[0-9]+.[0-9]+' *.gemspec`.split.first
+    assert_equal lib_version, gemspec_version
   end
 end
