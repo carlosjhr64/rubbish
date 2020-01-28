@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.author   = 'carlosjhr64'
   s.email    = 'carlosjhr64@gmail.com'
 
-  s.date     = '2019-12-10'
+  s.date     = '2020-01-28'
   s.licenses = ['MIT']
 
   s.description = <<DESCRIPTION
@@ -27,7 +27,7 @@ README.md
 lib/rubbish.rb
   )
 
-  s.requirements << 'ruby: ruby 2.6.5p114 (2019-10-01 revision 67812) [x86_64-linux]'
+  s.requirements << 'ruby: ruby 2.7.0p0 (2019-12-25 revision 647ee6f091) [x86_64-linux]'
   s.requirements << 'bash: GNU bash, version 5.0.11(1)-release (x86_64-redhat-linux-gnu)'
   s.requirements << 'fish: fish, version 3.0.2'
 
