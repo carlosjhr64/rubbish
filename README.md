@@ -1,5 +1,9 @@
 # rubbish
 
+* [VERSION 0.2.200128](https://github.com/author/rubbish/releases)
+* [github](https://www.github.com/author/rubbish)
+* [rubygems](https://rubygems.org/gems/rubbish)
+
 ## DESCRIPTION:
 
 A ruby-ish way to go to the shell.
@@ -15,37 +19,39 @@ you may want to run a specific shell like fish for it's unique features:
 
     # Fish features the double splat...
     # reads output and returns it.
-    ls_lib = Rubbish.fish('ls lib/**.rb').split #=> ["lib/good.rb", "lib/good/bad.rb", "lib/good/ugly.rb"]
+    ls_lib = Rubbish.fish('ls lib/**.rb').split #=> ["lib/rubbish.rb"]
 
     # Run a bash script, have it output to STDOUT(read: false)...
     Rubbish.bash <<-BASH, read: false
       echo "Date/Time now: "
       date
     BASH
+    #=> true
 
     # Rubbish will accept :fish and :bash calls, but
     # you can add other shells... say... ruby?
     # sure, why not:
     Rubbish::SHELL_VERSION[:ruby] = '2.0' # Ensures it's ruby ~>2.0.
-    answer = Rubbish.ruby <<-RUBY #=> "11"
+    answer = Rubbish.ruby <<-RUBY
       a = 5
       b = 6
       puts a+b
     RUBY
+    #=> "11\n"
 
 ## FEATURES:
 
 Read(read: true) by default:
 
-* Rubbish.shell('bash','echo "OK"') #=> OK
-* Rubbish.shell('fish'){|p| p.puts 'echo "OK"'}  #=> OK
-* Rubbish.bash('echo "OK"') #=> OK
-* Rubbish.fish('true') #=> ''
+    Rubbish.shell('bash','echo "OK"')              #=> "OK\n"
+    Rubbish.shell('fish'){|p| p.puts 'echo "OK"'}  #=> "OK\n"
+    Rubbish.bash('echo "OK"')                      #=> "OK\n"
+    Rubbish.fish('true')                           #=> ""
 
 Exit status instead when not reading(read: false):
 
-* Rubbish.fish('true', read: false) #=> true
-* Rubbish.fish('false', read: false) #=> false
+    Rubbish.fish('true', read: false)  #=> true
+    Rubbish.fish('false', read: false) #=> false
 
 An edge case:
 
@@ -56,8 +62,8 @@ An edge case:
       p.puts "echo Day!"
       b = p.gets
     end
-    puts b # Good
-    puts a # Day!
+    b #=> "Good\n"
+    a #=> "Day!\n"
 
 ## INSTALL:
 
