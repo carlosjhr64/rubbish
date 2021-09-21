@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
 
   s.homepage = 'https://github.com/carlosjhr64/rubbish'
 
-  s.author   = 'carlosjhr64'
+  s.author   = 'CarlosJHR64'
   s.email    = 'carlosjhr64@gmail.com'
 
   s.date     = '2021-09-21'
@@ -27,7 +27,7 @@ README.md
 lib/rubbish.rb
   )
 
-  s.requirements << 'ruby: ruby 3.0.2p107 (2021-09-21 revision 0db68f0233) [x86_64-linux]'
+  s.requirements << 'ruby: ruby 3.0.2p107 (2021-07-07 revision 0db68f0233) [x86_64-linux]'
   s.requirements << 'bash: GNU bash, version 5.1.0(1)-release (x86_64-redhat-linux-gnu)'
   s.requirements << 'fish: fish, version 3.3.1'
 
