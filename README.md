@@ -78,7 +78,7 @@ Rubbish.date date:'2021-09-21' #=> "Tue Sep 21 12:00:00 AM PDT 2021\n"
 ```console
 $ gem install rubbish
 ```
-== LICENSE:
+## LICENSE:
 
 (The MIT License)
 
