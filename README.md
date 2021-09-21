@@ -69,6 +69,11 @@ end
 b #=> "Good\n"
 a #=> "Day!\n"
 ```
+Passing options to the "shell":
+```ruby
+Rubbish::SHELL_VERSION[:date] = nil
+Rubbish.date date:'2021-09-21' #=> "Tue Sep 21 12:00:00 AM PDT 2021\n"
+```
 ## INSTALL:
 ```console
 $ gem install rubbish
