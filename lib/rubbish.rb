@@ -1,5 +1,5 @@
 module Rubbish
-  VERSION = '0.2.200128'
+  VERSION = '0.2.210921'
   SHELL_VERSION = {bash: nil, fish: nil}
 
   # Fine!
@@ -50,7 +50,9 @@ module Rubbish
         if version = `#{shell} --version`.scan(/\d+\.\d+\.\d+/).first
           version  = Gem::Version.new version
           bumped = minimum.bump
-          raise "Need #{shell} version ~> #{minimum}" unless version >= minimum and version < bumped
+          unless version >= minimum and version < bumped
+            raise "Need #{shell} version ~> #{minimum}"
+          end
           # need to only check once
           SHELL_VERSION[shell] = nil
         else

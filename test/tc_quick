@@ -8,7 +8,7 @@ class TestRubbish < Test::Unit::TestCase
     assert_equal 'OK', Rubbish.shell('fish', 'echo "OK"').strip
     assert_equal 'OK', Rubbish.bash('echo "OK"').strip
     assert_equal 'OK', Rubbish.fish('echo "OK"').strip
-    Rubbish::SHELL_VERSION[:ruby] = '2.0'
+    Rubbish::SHELL_VERSION[:ruby] = '3.0'
     assert_equal 'OK', Rubbish.ruby('puts "OK"').strip
   end
 end

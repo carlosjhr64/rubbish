@@ -1,14 +1,14 @@
 Gem::Specification.new do |s|
 
   s.name     = 'rubbish'
-  s.version  = '0.2.200128'
+  s.version  = '0.2.210921'
 
   s.homepage = 'https://github.com/carlosjhr64/rubbish'
 
   s.author   = 'carlosjhr64'
   s.email    = 'carlosjhr64@gmail.com'
 
-  s.date     = '2020-01-28'
+  s.date     = '2021-09-21'
   s.licenses = ['MIT']
 
   s.description = <<DESCRIPTION
@@ -27,8 +27,8 @@ README.md
 lib/rubbish.rb
   )
 
-  s.requirements << 'ruby: ruby 2.7.0p0 (2019-12-25 revision 647ee6f091) [x86_64-linux]'
-  s.requirements << 'bash: GNU bash, version 5.0.11(1)-release (x86_64-redhat-linux-gnu)'
-  s.requirements << 'fish: fish, version 3.0.2'
+  s.requirements << 'ruby: ruby 3.0.2p107 (2021-09-21 revision 0db68f0233) [x86_64-linux]'
+  s.requirements << 'bash: GNU bash, version 5.1.0(1)-release (x86_64-redhat-linux-gnu)'
+  s.requirements << 'fish: fish, version 3.3.1'
 
 end

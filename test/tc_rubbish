@@ -45,7 +45,7 @@ class TestRubbish < Test::Unit::TestCase
     assert_raise(RuntimeError) do
       Rubbish.ruby('puts "OK"')
     end
-    Rubbish::SHELL_VERSION[:ruby] = '2.0'
+    Rubbish::SHELL_VERSION[:ruby] = '3.0'
     assert_equal "OK\n", Rubbish.ruby('puts "OK"')
     # Ensuring it only checks version once...
     assert_true Rubbish::SHELL_VERSION.has_key? :ruby

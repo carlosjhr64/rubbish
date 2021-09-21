@@ -1,6 +1,6 @@
 # rubbish
 
-* [VERSION 0.2.200128](https://github.com/author/rubbish/releases)
+* [VERSION 0.2.210921](https://github.com/author/rubbish/releases)
 * [github](https://www.github.com/author/rubbish)
 * [rubygems](https://rubygems.org/gems/rubbish)
 
@@ -14,31 +14,31 @@ Bash and Fish aware.
 
 Although it's easy enough to access the system's default shell from ruby,
 you may want to run a specific shell like fish for it's unique features:
+```ruby
+require 'rubbish'
 
-    require 'rubbish'
+# Fish features the double splat...
+# reads output and returns it.
+ls_lib = Rubbish.fish('ls lib/**.rb').split #=> ["lib/rubbish.rb"]
 
-    # Fish features the double splat...
-    # reads output and returns it.
-    ls_lib = Rubbish.fish('ls lib/**.rb').split #=> ["lib/rubbish.rb"]
+# Run a bash script, have it output to STDOUT(read: false)...
+Rubbish.bash <<-BASH, read: false
+  echo "Date/Time now: "
+  date
+BASH
+#=> true
 
-    # Run a bash script, have it output to STDOUT(read: false)...
-    Rubbish.bash <<-BASH, read: false
-      echo "Date/Time now: "
-      date
-    BASH
-    #=> true
-
-    # Rubbish will accept :fish and :bash calls, but
-    # you can add other shells... say... ruby?
-    # sure, why not:
-    Rubbish::SHELL_VERSION[:ruby] = '2.0' # Ensures it's ruby ~>2.0.
-    answer = Rubbish.ruby <<-RUBY
-      a = 5
-      b = 6
-      puts a+b
-    RUBY
-    #=> "11\n"
-
+# Rubbish will accept :fish and :bash calls, but
+# you can add other shells... say... ruby?
+# sure, why not:
+Rubbish::SHELL_VERSION[:ruby] = '3.0' # Ensures it's ruby ~>3.0.
+answer = Rubbish.ruby <<-RUBY
+  a = 5
+  b = 6
+  puts a+b
+RUBY
+#=> "11\n"
+```
 ## FEATURES:
 
 Read(read: true) by default:
@@ -66,14 +66,14 @@ An edge case:
     a #=> "Day!\n"
 
 ## INSTALL:
-
-    $ gem install rubbish
-
+```console
+$ gem install rubbish
+```
 == LICENSE:
 
 (The MIT License)
 
-Copyright (c) 2020 carlosjhr64
+Copyright (c) 2021 CarlosJHR64
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
