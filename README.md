@@ -18,10 +18,14 @@ you may want to run a specific shell like fish for it's unique features:
 require 'rubbish'
 
 # Fish features the double splat...
-# reads output and returns it.
-ls_lib = Rubbish.fish('ls lib/**.rb').split #=> ["lib/rubbish.rb"]
+# reads output and returns it:
+Rubbish.fish('ls lib/**.rb').split #=> ["lib/rubbish.rb"]
+# The '?' method return weather or not the command succeeded.
+# Fish's true and false commands:
+Rubbish.fish?('true') #=> true
+Rubbish.fish?('false') #=> false
 
-# Run a bash script, have it output to STDOUT(read: false)...
+# Run a bash script, have it output to STDOUT...
 Rubbish.bash? <<-BASH
   echo "Date/Time now: "
   date
@@ -41,15 +45,16 @@ RUBY
 ```
 ## FEATURES:
 
-Read(read: true) by default:
 ```ruby
 Rubbish.shell('echo "OK"')              #=> "OK\n"
 Rubbish.shell(shell:'fish'){|p| p.puts 'echo "OK"'}  #=> "OK\n"
 Rubbish.bash('echo "OK"')                      #=> "OK\n"
 Rubbish.fish('true')                           #=> ""
 ```
-Exit status instead when not reading(read: false):
+Exit status instead:
 ```ruby
+Rubbish.shell('true', shell:'fish', read:false) #=> true
+Rubbish.shell('false', shell:'fish', read:false) #=> false
 Rubbish.fish?('true')  #=> true
 Rubbish.fish?('false') #=> false
 ```
