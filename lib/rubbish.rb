@@ -12,18 +12,15 @@ module Rubbish
         pipe.close_write
         writing = false
       end
-      if block
-        block.call(pipe)
-        # close if we were writing
-        pipe.close_write if writing
-      end
+      block.call(pipe) if block
+      # close if we were writing
+      pipe.close_write if writing
       # Read if reading
       read = pipe.read if read
     end
     read || $?.to_i==0
   end
 
-  # TODO: kw
   def self.method_missing(shell, *args, **kw, &block)
     shell=shell[0..-2].to_sym unless read=(shell[-1]!='?')
     if SHELL_VERSION.has_key?(shell) and args.length.between?(0,1)
@@ -41,8 +38,13 @@ module Rubbish
           raise "Could not get the #{shell} version"
         end
       end
+      shell = shell.to_s
+      if kw.length > 0
+        shell << ' ' + kw.select{_2}.map{
+          "--#{_1}=#{_2}".sub(/=(true)?$/,'').sub(/^--(\w)$/, '-\1')}.join(' ')
+      end
       script = args[0]
-      return Rubbish.shell(script, shell:shell.to_s, read:read,  &block)
+      return Rubbish.shell(script, shell:shell, read:read,  &block)
     end
     super
   end
