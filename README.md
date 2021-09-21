@@ -1,6 +1,6 @@
 # rubbish
 
-* [VERSION 0.2.210921](https://github.com/author/rubbish/releases)
+* [VERSION 1.0.210921](https://github.com/author/rubbish/releases)
 * [github](https://www.github.com/author/rubbish)
 * [rubygems](https://rubygems.org/gems/rubbish)
 
@@ -22,7 +22,7 @@ require 'rubbish'
 ls_lib = Rubbish.fish('ls lib/**.rb').split #=> ["lib/rubbish.rb"]
 
 # Run a bash script, have it output to STDOUT(read: false)...
-Rubbish.bash <<-BASH, read: false
+Rubbish.bash? <<-BASH
   echo "Date/Time now: "
   date
 BASH
@@ -42,29 +42,28 @@ RUBY
 ## FEATURES:
 
 Read(read: true) by default:
-
-    Rubbish.shell('bash','echo "OK"')              #=> "OK\n"
-    Rubbish.shell('fish'){|p| p.puts 'echo "OK"'}  #=> "OK\n"
-    Rubbish.bash('echo "OK"')                      #=> "OK\n"
-    Rubbish.fish('true')                           #=> ""
-
+```ruby
+Rubbish.shell('echo "OK"')              #=> "OK\n"
+Rubbish.shell(shell:'fish'){|p| p.puts 'echo "OK"'}  #=> "OK\n"
+Rubbish.bash('echo "OK"')                      #=> "OK\n"
+Rubbish.fish('true')                           #=> ""
+```
 Exit status instead when not reading(read: false):
-
-    Rubbish.fish('true', read: false)  #=> true
-    Rubbish.fish('false', read: false) #=> false
-
+```ruby
+Rubbish.fish?('true')  #=> true
+Rubbish.fish?('false') #=> false
+```
 An edge case:
-
-    require 'rubbish'
-    b = nil
-    a = Rubbish.bash do |p|
-      p.puts "echo Good"
-      p.puts "echo Day!"
-      b = p.gets
-    end
-    b #=> "Good\n"
-    a #=> "Day!\n"
-
+```ruby
+b = nil
+a = Rubbish.bash do |p|
+  p.puts "echo Good"
+  p.puts "echo Day!"
+  b = p.gets
+end
+b #=> "Good\n"
+a #=> "Day!\n"
+```
 ## INSTALL:
 ```console
 $ gem install rubbish

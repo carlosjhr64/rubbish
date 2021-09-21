@@ -1,4 +1,3 @@
-arg
 args
 bash
 between
@@ -7,14 +6,12 @@ bump
 bumped
 call
 close_write
-empty
-FalseClass
 first
 fish
 Gem
-Hash
 has_key
 IO
+kw
 length
 method_missing
 minimum
@@ -28,11 +25,9 @@ scan
 script
 shell
 SHELL_VERSION
-shift
-String
 to_i
 to_s
-TrueClass
+to_sym
 version
 Version
 VERSION

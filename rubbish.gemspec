@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
 
   s.name     = 'rubbish'
-  s.version  = '0.2.210921'
+  s.version  = '1.0.210921'
 
   s.homepage = 'https://github.com/carlosjhr64/rubbish'
 

@@ -1,7 +1,5 @@
-arg
 args
 CarlosJHR
-FalseClass
 github
 https
 ish
@@ -12,5 +10,6 @@ rb
 rubygems
 STDOUT
 sublicense
-TrueClass
+sym
+TODO
 www

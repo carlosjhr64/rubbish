@@ -1,28 +1,8 @@
 module Rubbish
-  VERSION = '0.2.210921'
+  VERSION = '1.0.210921'
   SHELL_VERSION = {bash: nil, fish: nil}
 
-  # Fine!
-  # Let there be Rubbish.args!!!
-  def self.args(*args)
-    script, read  =  nil, true
-    until args.empty?
-      arg = args.shift
-      case arg
-      when String
-        script = arg
-      when TrueClass, FalseClass
-        read = arg
-      when Hash
-        script = arg[:script]  if arg.has_key? :script
-        read   = arg[:read]    if arg.has_key? :read
-      end
-    end
-    return script, read
-  end
-
-  def self.shell(shell, *args, &block)
-    script, read = Rubbish.args(*args)
+  def self.shell(script=nil, shell:'bash', read:true, &block)
     IO.popen(shell, (read)? 'w+' : 'w') do |pipe|
       # No matter what, we know we're going to write first.
       writing = true
@@ -43,8 +23,10 @@ module Rubbish
     read || $?.to_i==0
   end
 
-  def self.method_missing(shell, *args, &block)
-    if args.length.between?(0,2) and SHELL_VERSION.has_key? shell
+  # TODO: kw
+  def self.method_missing(shell, *args, **kw, &block)
+    shell=shell[0..-2].to_sym unless read=(shell[-1]!='?')
+    if SHELL_VERSION.has_key?(shell) and args.length.between?(0,1)
       if minimum = SHELL_VERSION[shell]
         minimum = Gem::Version.new minimum
         if version = `#{shell} --version`.scan(/\d+\.\d+\.\d+/).first
@@ -59,13 +41,12 @@ module Rubbish
           raise "Could not get the #{shell} version"
         end
       end
-      script, read  =  Rubbish.args(*args)
-      return Rubbish.shell(shell.to_s, script, read,  &block)
+      script = args[0]
+      return Rubbish.shell(script, shell:shell.to_s, read:read,  &block)
     end
     super
   end
 end
-
 # Requires:
 #`ruby`
 #`bash`

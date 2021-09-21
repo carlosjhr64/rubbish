@@ -7,8 +7,8 @@ class TestRubbish < Test::Unit::TestCase
     assert_nothing_raised() do
       ['bash', 'fish'].each do |shell|
         [true, false].each do |read|
-          a = Rubbish.shell(shell, 'echo "OK"', read: read)
-          b = Rubbish.shell(shell, read: read){|psh| psh.puts 'echo "OK"'}
+          a = Rubbish.shell('echo "OK"', shell:shell, read: read)
+          b = Rubbish.shell(shell:shell, read: read){|psh| psh.puts 'echo "OK"'}
           [a,b].each do |x|
             case read
             when true
@@ -24,7 +24,7 @@ class TestRubbish < Test::Unit::TestCase
 
   def test_shell_edge_case
     b = nil
-    a = Rubbish.shell('bash') do |psh|
+    a = Rubbish.shell do |psh|
       psh.puts 'echo "Good"'
       psh.puts 'echo "Day!"'
       b = psh.gets
@@ -34,9 +34,9 @@ class TestRubbish < Test::Unit::TestCase
   end
 
   def test_fish_true_false
-    a = Rubbish.shell('fish', 'true', read: false)
+    a = Rubbish.shell('true', shell:'fish', read: false)
     assert_equal(true, a)
-    b = Rubbish.shell('fish', 'false', read: false)
+    b = Rubbish.shell('false', shell:'fish', read: false)
     assert_equal(false, b)
   end
 

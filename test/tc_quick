@@ -4,8 +4,8 @@ require 'rubbish'
 
 class TestRubbish < Test::Unit::TestCase
   def test_shells
-    assert_equal 'OK', Rubbish.shell('bash', 'echo "OK"').strip
-    assert_equal 'OK', Rubbish.shell('fish', 'echo "OK"').strip
+    assert_equal 'OK', Rubbish.shell('echo "OK"').strip
+    assert_equal 'OK', Rubbish.shell('echo "OK"', shell:'fish').strip
     assert_equal 'OK', Rubbish.bash('echo "OK"').strip
     assert_equal 'OK', Rubbish.fish('echo "OK"').strip
     Rubbish::SHELL_VERSION[:ruby] = '3.0'
