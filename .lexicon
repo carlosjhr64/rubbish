@@ -1,3 +1,5 @@
+_1
+_2
 args
 bash
 between
@@ -11,8 +13,10 @@ fish
 Gem
 has_key
 IO
+join
 kw
 length
+map
 method_missing
 minimum
 new
@@ -23,8 +27,10 @@ read
 Rubbish
 scan
 script
+select
 shell
 SHELL_VERSION
+sub
 to_i
 to_s
 to_sym
