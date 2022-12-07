@@ -1,6 +1,8 @@
 module Rubbish
   VERSION = '1.0.221207'
   SHELL_VERSION = {bash: nil, fish: nil}
+  # This is a contraction of Shellwords.escape function
+  SHELLWORDS_ESCAPE = lambda{|w|w.gsub(/[^\w\-.,:+\/@\n]/,'\\\\\\&').gsub(/\n/,"'\n'")}
 
   def self.shell(script=nil, shell:'bash', read:true, &block)
     IO.popen(shell, (read)? 'w+' : 'w') do |pipe|
@@ -21,32 +23,36 @@ module Rubbish
     read || $?.to_i==0
   end
 
-  def self.method_missing(shell, *args, **kw, &block)
-    shell=shell[0..-2].to_sym unless read=(shell[-1]!='?')
-    if SHELL_VERSION.has_key?(shell) and args.length.between?(0,1)
-      if minimum = SHELL_VERSION[shell]
-        minimum = Gem::Version.new minimum
-        if version = `#{shell} --version`.scan(/\d+\.\d+\.\d+/).first
-          version  = Gem::Version.new version
-          bumped = minimum.bump
-          unless version >= minimum and version < bumped
-            raise "Need #{shell} version ~> #{minimum}"
-          end
-          # need to only check once
-          SHELL_VERSION[shell] = nil
+  def self.method_missing(cmd, *args, **kw, &block)
+    cmd=cmd[0..-2].to_sym unless read=(cmd[-1]!='?')
+    return super unless SHELL_VERSION.has_key?(cmd) and args.length.between?(0,1)
+    if minimum = SHELL_VERSION[cmd]
+      minimum = Gem::Version.new minimum
+      if version = `#{cmd} --version`.match(/\d+\.\d+\.\d+/)&.match(0)
+        version  = Gem::Version.new version
+        bumped = minimum.bump
+        unless version >= minimum and version < bumped
+          raise "Need #{cmd} version ~> #{minimum}"
+        end
+        # need to only check once
+        SHELL_VERSION[cmd] = nil
+      else
+        raise "Could not get the #{cmd} version"
+      end
+    end
+    command = cmd.to_s
+    if kw.length > 0
+      kw.each do |k,w|
+        next if not w
+        if w==true
+          command << " #{k.length>1? '--':'-'}#{k}"
         else
-          raise "Could not get the #{shell} version"
+          command << " --#{k}=#{SHELLWORDS_ESCAPE[w.to_s]}"
         end
       end
-      shell = shell.to_s
-      if kw.length > 0
-        shell << ' ' + kw.select{_2}.map{
-          "--#{_1}=#{_2}".sub(/=(true)?$/,'').sub(/^--(\w)$/, '-\1')}.join(' ')
-      end
-      script = args[0]
-      return Rubbish.shell(script, shell:shell, read:read,  &block)
     end
-    super
+    script = args[0]
+    return Rubbish.shell(script, shell:command, read:read,  &block)
   end
 end
 # Requires:

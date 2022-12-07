@@ -1,8 +1,10 @@
 args
 CarlosJHR
+cmd
 com
 def
 github
+gsub
 ish
 kw
 NONINFRINGEMENT
@@ -11,6 +13,8 @@ popen
 rb
 rubygems
 Sep
+Shellwords
+SHELLWORDS
 STDOUT
 sublicense
 sym
