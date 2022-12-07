@@ -1,6 +1,6 @@
 # rubbish
 
-* [VERSION 1.0.210921](https://github.com/author/rubbish/releases)
+* [VERSION 1.0.221207](https://github.com/author/rubbish/releases)
 * [github](https://www.github.com/author/rubbish)
 * [rubygems](https://rubygems.org/gems/rubbish)
 
@@ -72,7 +72,7 @@ a #=> "Day!\n"
 Passing options to the "shell":
 ```ruby
 Rubbish::SHELL_VERSION[:date] = nil
-Rubbish.date date:'2021-09-21' #=> "Tue Sep 21 12:00:00 AM PDT 2021\n"
+Rubbish.date date:'2021-09-21', R:true #=> "Tue, 21 Sep 2021 00:00:00 -0700\n"
 ```
 ## INSTALL:
 ```console
@@ -82,7 +82,7 @@ $ gem install rubbish
 
 (The MIT License)
 
-Copyright (c) 2021 CarlosJHR64
+Copyright (c) 2022 CarlosJHR64
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

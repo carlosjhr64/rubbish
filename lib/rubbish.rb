@@ -1,5 +1,5 @@
 module Rubbish
-  VERSION = '1.0.210921'
+  VERSION = '1.0.221207'
   SHELL_VERSION = {bash: nil, fish: nil}
 
   def self.shell(script=nil, shell:'bash', read:true, &block)
