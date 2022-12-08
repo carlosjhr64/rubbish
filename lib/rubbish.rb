@@ -1,5 +1,5 @@
 module Rubbish
-  VERSION = '1.0.221207'
+  VERSION = '1.1.221208'
   SHELL_VERSION = {bash: nil, fish: nil}
   # This is a contraction of Shellwords.escape function
   SHELLWORDS_ESCAPE = lambda{|w|w.gsub(/[^\w\-.,:+\/@\n]/,'\\\\\\&').gsub(/\n/,"'\n'")}
@@ -40,14 +40,14 @@ module Rubbish
         raise "Could not get the #{cmd} version"
       end
     end
-    command = cmd.to_s
+    command = [cmd.to_s]
     if kw.length > 0
       kw.each do |k,w|
         next if not w
         if w==true
-          command << " #{k.length>1? '--':'-'}#{k}"
+          command << "#{k.length>1? '--':'-'}#{k}"
         else
-          command << " --#{k}=#{SHELLWORDS_ESCAPE[w.to_s]}"
+          command << "--#{k}=#{w}"
         end
       end
     end

@@ -1,6 +1,6 @@
 # rubbish
 
-* [VERSION 1.0.221207](https://github.com/author/rubbish/releases)
+* [VERSION 1.1.221208](https://github.com/author/rubbish/releases)
 * [github](https://www.github.com/author/rubbish)
 * [rubygems](https://rubygems.org/gems/rubbish)
 
