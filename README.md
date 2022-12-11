@@ -1,8 +1,13 @@
 # rubbish
 
-* [VERSION 1.1.221208](https://github.com/author/rubbish/releases)
-* [github](https://www.github.com/author/rubbish)
+* [VERSION 1.1.221208](https://github.com/carlosjhr64/rubbish/releases)
+* [github](https://www.github.com/carlosjhr64/rubbish)
 * [rubygems](https://rubygems.org/gems/rubbish)
+
+## Deprecation notice:
+
+This is my last `Rubbish` update.
+I've merged this project with [Helpema](https://www.github.com/carlosjhr64/helpema).
 
 ## DESCRIPTION:
 
